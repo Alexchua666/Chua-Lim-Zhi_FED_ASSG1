@@ -1,0 +1,104 @@
+body {
+    background-color: #121212;
+    color: #ffffff;
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+  
+  /* Top bar styles */
+  .top-bar {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 10px 20px;
+    background-color: #0e1426;  /* Dark background for top bar */
+    color: #fff;  /* White text color */
+    box-sizing: border-box;
+    position: fixed;  /* Keeps the top bar fixed at the top */
+    top: 0;
+    left: 0;
+    height: 50px;  /* Fixed height for the top bar */
+  }
+  
+  .top-bar span::after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 2px;
+    background: #fff;
+    transition: width 0.3s;
+    margin-top: 5px;
+  }
+  
+  .top-bar span:hover::after {
+    width: 100%;
+  }
+  
+  /* Logo / "Acool_coder" text */
+  .top-bar .logo-text {
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: font-size 0.3s ease, transform 0.3s ease; /* Smooth transition for font-size and scaling */
+    text-align: center;
+    color: #fff;
+    letter-spacing: 1px; /* Slight letter spacing for better readability */
+    text-decoration: none; /* Remove underline */
+    margin-right: 20px; /* Add some space to the right of the logo */
+  }
+
+  .top-bar .logo-text:hover {
+    text-decoration: none; /* Ensure no underline on hover */
+  }
+  
+  .top-bar a {
+    color: #fff; /* Ensure link text is white */
+    text-decoration: none; /* Remove underline from links */
+    margin-right: 20px; /* Add some space between links */
+    display: flex;
+    align-items: center; /* Align links vertically with the logo */
+    padding-top: 5px; /* Move links down */
+  }
+  
+  .top-bar a:last-child {
+    margin-right: 0; /* Remove margin from the last link */
+  }
+  
+  .top-bar a:hover span::after {
+    width: 100%;
+  }
+  
+  .top-bar span {
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+#canvas {
+    border: 1px solid #ffffff;
+}
+
+#download-btn {
+    background-color: #1e88e5;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    margin-top: 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+#download-btn:hover {
+    background-color: #1565c0;
+}

@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prepare</title>
+  <style>
+    /* Include your existing CSS here */
+    body {
+      background-color: #000; /* Set background to black */
+      color: #fff; /* Set text color to white */
+      font-family: Satoshi, "Open Sans", Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden; /* Prevent horizontal overflow */
+    }
+
+    #basicLayout {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background-color: #000; /* Set layout background to black */
+    }
+
+    /* Top bar styles */
+    .top-bar {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      padding: 10px 20px;
+      background-color: #0e1426;  /* Dark background for top bar */
+      color: #fff;  /* White text color */
+      box-sizing: border-box;
+      position: fixed;  /* Keeps the top bar fixed at the top */
+      top: 0;
+      left: 0;
+      height: 50px;  /* Fixed height for the top bar */
+    }
+
+    .top-bar span::after {
+      content: '';
+      display: block;
+      width: 0;
+      height: 2px;
+      background: #fff;
+      transition: width 0.3s;
+      margin-top: 5px;
+    }
+
+    .top-bar span:hover::after {
+      width: 100%;
+    }
+
+    /* Logo / "Acool_coder" text */
+    .top-bar .logo-text {
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: font-size 0.3s ease, transform 0.3s ease; /* Smooth transition for font-size and scaling */
+      text-align: center;
+      color: #fff;
+      letter-spacing: 1px; /* Slight letter spacing for better readability */
+      text-decoration: none; /* Remove underline */
+      margin-right: 20px; /* Add some space to the right of the logo */
+    }
+
+    .top-bar .logo-text:hover {
+      text-decoration: none; /* Ensure no underline on hover */
+    }
+
+    .top-bar a {
+      color: #fff; /* Ensure link text is white */
+      text-decoration: none; /* Remove underline from links */
+      margin-right: 20px; /* Add some space between links */
+      display: flex;
+      align-items: center; /* Align links vertically with the logo */
+      padding-top: 5px; /* Move links down */
+    }
+
+    .top-bar a:last-child {
+      margin-right: 0; /* Remove margin from the last link */
+    }
+
+    .top-bar a:hover span::after {
+      width: 100%;
+    }
+
+    .top-bar span {
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    /* Content Section */
+    .content {
+      background: none;  /* No background, let the body background show */
+      flex-grow: 1;  /* Ensures the content section grows to take up available space */
+      padding: 16px;  /* Slightly increased padding for better spacing */
+      margin-top: 60px;  /* Increased margin-top to ensure top bar does not overlap content */
+      overflow-y: auto;  /* Enables vertical scrolling if content overflows */
+    }
+
+    /* Content Container */
+    .content-container {
+      margin: 20px auto;  /* Center align the container with margin */
+      width: 100%;  /* Full width of the parent, but with some responsive constraints */
+      max-width: 1200px;  /* Ensure it doesn't become too wide on larger screens */
+      box-sizing: border-box;  /* Include padding in the total width */
+    }
+
+    /* Dashboard Grid */
+    .dashboard-v2.container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .dashboard-section-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 20px;  /* Adjust gap between the cards */
+      width: 100%;
+      max-width: 1200px; /* Adjust max width for layout */
+    }
+
+    .skill-progress-card.card-box {
+      background-color: #14171F;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      padding: 15px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      flex: 1 1 calc(25% - 20px); /* Adjust width for responsiveness */
+      min-width: 250px; /* Minimum width for each card */
+    }
+
+    .ui-card.ui-layer-3.active-card {
+      padding: 20px;
+    }
+
+    .ui-title.text-sec-headline-xs {
+      font-size: 1.25rem;
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+
+    .base-card-detail.text-content {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .skill-progress-bar {
+      width: 100%;
+      margin-bottom: 10px;
+    }
+
+    .ui-progress-bar.progress-bar.theme-m {
+      background-color: #e0e0e0;
+      border-radius: 8px;
+      height: 8px;
+      overflow: hidden;
+    }
+
+    .progress-filler {
+      background-color: #4caf50; /* Green color for progress */
+      height: 100%;
+      transition: width 0.5s ease-in-out;
+    }
+
+    .completed {
+      background-color: #4caf50; /* Green background for completed quizzes */
+    }
+
+    .progress-summary {
+      margin-top: 20px;
+      padding: 20px;
+      background-color: #14171F;
+      border-radius: 8px;
+      color: #fff;
+      text-align: center;
+    }
+
+    .progress-summary h3 {
+      margin-bottom: 10px;
+    }
+
+    .progress-summary p {
+      margin: 5px 0;
+    }
+
+    .solve-challenge-button {
+      text-align: center;
+      display: inline-block;
+      margin-top: 10px;
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: white;
+      border-radius: 4px;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+    }
+
+    .solve-challenge-button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <div id="basicLayout">
+    <!-- Top Bar Section -->
+    <nav class="top-bar">
+      <span class="logo-text">Acool_coder |</span>
+      <a href="index.html"><span>Home</span></a>
+      <a href="quiz.html"><span>Prepare</span></a>
+      <a href="certificate.html"><span>Certify</span></a>
+    </nav>
+
+    <!-- Content Section -->
+    <main class="content">
+      <div class="dashboard-v2 container">
+        <div class="dashboard-section-header">
+          <h2 class="text-para-headline bold dashboard-section-title">Your Preparation</h2>
+        </div>
+      </div>
+
+      <!-- Content Container -->
+      <div class="content-container">
+        <div class="dashboard-v2 container">
+          <div class="dashboard-section-header">
+            <!-- Section Header Content -->
+          </div>
+
+          <!-- Single container for all cards -->
+          <div class="dashboard-section-grid">
+            <!-- Java Code Convention Card -->
+            <div class="skill-progress-card card-box quiz1-card">
+              <div class="ui-card ui-layer-3 active-card">
+                <h3 class="ui-title text-sec-headline-xs">Java Code Convention</h3>
+                <div class="card-content">
+                  <div class="base-card-detail text-content">
+                    <div class="skill-progress-bar">
+                      <div class="ui-progress-bar progress-bar theme-m">
+                        <div class="progress-filler" style="width: 80%;"></div>
+                      </div>
+                    </div>
+                    <div class="progress-count text-content">
+                      Easy, Java (Basic), Max score 4
+                    </div>
+                    <div class="progress-count text-content" id="quiz1-status">
+                      Not Attempted
+                    </div>
+                  </div>
+                  <a class="solve-challenge-button" href="quiz1.html">
+                    Solve Challenge
+                  </a>
+                </div>
+              </div>
+            </div>
+          <div class="dashboard-section-grid">
+            <!-- Java OOP Card -->
+            <div class="skill-progress-card card-box quiz2-card">
+              <div class="ui-card ui-layer-3 active-card">
+                <h3 class="ui-title text-sec-headline-xs">Java Constant</h3>
+                <div class="card-content">
+                  <div class="base-card-detail text-content">
+                    <div class="skill-progress-bar">
+                      <div class="ui-progress-bar progress-bar theme-m">
+                        <div class="progress-filler" style="width: 80%;"></div>
+                      </div>
+                    </div>
+                    <div class="progress-count text-content">
+                      Easy, Java (Basic), Max score 4
+                    </div>
+                    <div class="progress-count text-content" id="quiz2-status">
+                      Not Attempted
+                    </div>
+                  </div>
+                  <a class="solve-challenge-button" href="quiz2.html">
+                    Solve Challenge
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="dashboard-section-grid">
+            <div class="skill-progress-card card-box quiz3-card">
+              <div class="ui-card ui-layer-3 active-card">
+                <h3 class="ui-title text-sec-headline-xs">Java OOP</h3>
+                <div class="card-content">
+                  <div class="base-card-detail text-content">
+                    <div class="skill-progress-bar">
+                      <div class="ui-progress-bar progress-bar theme-m">
+                        <div class="progress-filler" style="width: 80%;"></div>
+                      </div>
+                    </div>
+                    <div class="progress-count text-content">
+                      Easy, Java (Basic), Max score 4
+                    </div>
+                    <div class="progress-count text-content" id="quiz3-status">
+                      Not Attempted
+                    </div>
+                  </div>
+                  <a class="solve-challenge-button" href="quiz3.html">
+                    Solve Challenge
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+  
+          <div class="dashboard-section-grid">
+            <div class="skill-progress-card card-box quiz4-card">
+              <div class="ui-card ui-layer-3 active-card">
+                <h3 class="ui-title text-sec-headline-xs">Java Collection</h3>
+                <div class="card-content">
+                  <div class="base-card-detail text-content">
+                    <div class="skill-progress-bar">
+                      <div class="ui-progress-bar progress-bar theme-m">
+                        <div class="progress-filler" style="width: 80%;"></div>
+                      </div>
+                    </div>
+                    <div class="progress-count text-content">
+                      Easy, Java (Basic), Max score 4
+                    </div>
+                    <div class="progress-count text-content" id="quiz4-status">
+                      Not Attempted
+                    </div>
+                  </div>
+                  <a class="solve-challenge-button" href="quiz4 .html">
+                    Solve Challenge
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+      
+      <script src="quiz.js"></script>
+
+  
+    </main>
+  </div>
+  </body>
+  </html>
